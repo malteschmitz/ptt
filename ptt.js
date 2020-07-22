@@ -1,7 +1,4 @@
 (function() {
-  const recordButton = document.getElementById('button');
-  const buttonHead = document.getElementById('head');
-
   let analyser;
   const initialize = () => {
     if (analyser) return;
@@ -41,7 +38,7 @@
   }
   setInterval(processInput, 50);
 
-  const svg = document.querySelector('#waveform svg');
+  const svg = document.querySelector('#wave');
   for (let i = 0; i < 30; i++) {
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     rect.setAttribute("width", "12");
@@ -67,6 +64,8 @@
   }
   renderBars();
 
+  const recordButton = document.getElementById('button');
+  const buttonHead = document.getElementById('head');
   recordButton.addEventListener('click', toggleRecording);
   recordButton.addEventListener('mousedown', () => {
     buttonHead.setAttribute('transform', 'translate(0 20)');
