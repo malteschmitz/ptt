@@ -52,15 +52,13 @@
 
   const renderBars = () => {
     let rects = svg.querySelectorAll('rect.bar');
-    let max = Math.max(...bars);
-    if (max > 0) {
-      bars.forEach((bar, i) => {
-        let rect = rects[i];
-        let height = bar / max * 200;
-        rect.setAttribute("height", height);
-        rect.setAttribute("y", 540 - height / 2);
-      });
-    }
+    let max = Math.max(1, ...bars);
+    bars.forEach((bar, i) => {
+      let rect = rects[i];
+      let height = bar / max * 200;
+      rect.setAttribute("height", height);
+      rect.setAttribute("y", 540 - height / 2);
+    });
   }
   renderBars();
 
