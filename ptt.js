@@ -1,4 +1,8 @@
 (function() {
+  if (webkitAudioContext) {
+    AudioContext = webkitAudioContext;
+  }
+
   let analyser;
   const initialize = () => {
     if (analyser) return;
