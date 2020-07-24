@@ -114,7 +114,7 @@
   ];
   let colorIndex = 0;
 
-  const nextColorButton = document.querySelector('#nextColor button');
+  const nextColorButton = document.getElementById('nextColor');
   nextColorButton.addEventListener('click', () => {
     colorIndex = (colorIndex + 1) % colors.length;
     const color = colors[colorIndex];
@@ -126,5 +126,48 @@
     buttonHead.setAttribute('fill', color.head);
   });
 
-})();
+  const getSvgDataUrl = () => {
+    const container = document.getElementById('container');
+    return 'data:image/svg+xml,' + encodeURIComponent(container.innerHTML);
+  }
 
+  const getPngDataUrl = (callback) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1920;
+    canvas.height = 1080;
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0);
+        const png = canvas.toDataURL("image/png");  
+        callback(png);
+    };
+    img.src = getSvgDataUrl();
+  }
+
+  const downloadUrl = (url, filename, done) => {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      if (done) {
+        done();
+      }
+    });
+  }
+
+  const downloadSvgButton = document.getElementById('downloadSvg');
+  downloadSvgButton.addEventListener('click', () => {
+    const url = getSvgDataUrl();
+    downloadUrl(url, "ptt.svg");
+  });
+
+  const downloadPngButton = document.getElementById('downloadPng');
+  downloadPngButton.addEventListener('click', () => {
+    getPngDataUrl(url => downloadUrl(url, "ptt.png", () => URL.revokeObjectURL(url)));
+  });
+
+})();
