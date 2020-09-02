@@ -1,4 +1,8 @@
-# PTT Interactive Logo
+# PTT Interactive Artwork
+
+[Push to Talk — Ein Digital Verteiltes Online-Chaos](https://di.c3voc.de/ptt:start)
+
+[Make your own Button by pressing the Button](https://malteschmitz.github.io/ptt/)
 
 The browser will [ask for permission to use your microphone](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) when you press the button. It will use your microphone to generate a waveform. No data will be collected or transfered. It runs locally in your browser using the [audio-processing graph tooling of your browser](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext). An [analyser node](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode) performs an [FFT](https://en.wikipedia.org/wiki/Fast_Fourier_transform) whose average is used as an indicator for the current loudness. This is done every 50 ms and added as a new value to an array of loudness values, which is limited to 30 entries. These values are normalized to their maximal value and mapped to the heights of 30 bars in the SVG image.
 
